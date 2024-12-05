@@ -1,6 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     if (page_number > 0) {
-    	
+        page_number += 1
     }
 })
 input.onButtonPressed(Button.AB, function () {
@@ -8,10 +8,20 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     if (page_number == 1) {
-    	
+        control.reset()
     }
     if (page_number == 2) {
-    	
+        strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        strip.show()
+        basic.pause(5000)
+        strip.showColor(neopixel.colors(NeoPixelColors.Green))
+        strip.show()
+        basic.pause(5000)
+        strip.showColor(neopixel.colors(NeoPixelColors.Blue))
+        strip.show()
+        basic.pause(5000)
+        strip.showRainbow(1, 360)
+        strip.show()
     }
     if (page_number == 3) {
     	
@@ -22,16 +32,20 @@ input.onButtonPressed(Button.B, function () {
     if (page_number == 5) {
     	
     }
-    if (page_number == 6) {
-    	
-    }
 })
 let page_number = 0
-let strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB_RGB)
+let strip: neopixel.Strip = null
+strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB)
 strip.setBrightness(30)
 strip.showRainbow(1, 360)
+let matrix = SmartMatrix.create(
+DigitalPin.P0,
+16,
+16,
+NeoPixelMode.RGB
+)
 basic.forever(function () {
-    if (page_number > 0) {
+    if (page_number == 0) {
         basic.showLeds(`
             . . . . .
             . . . . .
@@ -40,8 +54,8 @@ basic.forever(function () {
             . . . . .
             `)
     }
-    if (page_number == 7) {
-        page_number = 1
+    if (page_number == 6) {
+        page_number = 0
     }
     if (page_number == 1) {
         basic.showNumber(1)
@@ -57,14 +71,5 @@ basic.forever(function () {
     }
     if (page_number == 5) {
         basic.showNumber(5)
-    }
-    if (page_number == 6) {
-        basic.showLeds(`
-            . . # . .
-            . # . . .
-            # # # # .
-            # . . . #
-            . # # # .
-            `)
     }
 })
