@@ -38,6 +38,7 @@ let strip: neopixel.Strip = null
 strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB)
 strip.setBrightness(30)
 strip.showRainbow(1, 360)
+music.setBuiltInSpeakerEnabled(true)
 let matrix = SmartMatrix.create(
 DigitalPin.P0,
 16,
