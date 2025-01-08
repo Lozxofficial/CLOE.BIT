@@ -9,6 +9,7 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     if (page_number == 1) {
         control.reset()
+        page_number = 6
     }
     if (page_number == 2) {
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
@@ -22,6 +23,7 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(5000)
         strip.showRainbow(1, 360)
         strip.show()
+        page_number = 6
     }
     if (page_number == 3) {
     	
@@ -36,17 +38,37 @@ input.onButtonPressed(Button.B, function () {
 let page_number = 0
 let strip: neopixel.Strip = null
 strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB)
-strip.setBrightness(30)
 strip.showRainbow(1, 360)
+serial.setBaudRate(BaudRate.BaudRate9600)
 music.setBuiltInSpeakerEnabled(true)
 let matrix = SmartMatrix.create(
-DigitalPin.P0,
+DigitalPin.P1,
 16,
 16,
 NeoPixelMode.RGB
 )
+matrix.Brightness(32)
+for (let index = 0; index < 24; index++) {
+    matrix.show()
+    matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.White))
+    basic.pause(100)
+    matrix.show()
+    matrix.setPixel(9, 8, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.White))
+    basic.pause(100)
+    matrix.show()
+    matrix.setPixel(8, 9, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(2, 0, neopixel.colors(NeoPixelColors.White))
+    basic.pause(100)
+    matrix.show()
+    matrix.setPixel(7, 8, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(3, 0, neopixel.colors(NeoPixelColors.White))
+    basic.pause(100)
+}
 basic.forever(function () {
-    if (page_number == 0) {
+    if (page_number == 6) {
+        page_number = 0
         basic.showLeds(`
             . . . . .
             . . . . .
@@ -55,11 +77,8 @@ basic.forever(function () {
             . . . . .
             `)
     }
-    if (page_number == 6) {
-        page_number = 0
-    }
     if (page_number == 1) {
-        basic.showNumber(1)
+    	
     }
     if (page_number == 2) {
         basic.showNumber(2)
