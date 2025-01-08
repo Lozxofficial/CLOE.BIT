@@ -37,6 +37,7 @@ input.onButtonPressed(Button.B, function () {
 })
 let page_number = 0
 let strip: neopixel.Strip = null
+let login_complete = 0
 strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB)
 strip.showRainbow(1, 360)
 serial.setBaudRate(BaudRate.BaudRate9600)
@@ -77,7 +78,11 @@ for (let index = 0; index < 24; index++) {
     matrix.show()
     basic.pause(100)
     matrix.clear()
+    login_complete += 1
 }
+basic.forever(function () {
+	
+})
 basic.forever(function () {
     if (page_number == 6) {
         page_number = 0
