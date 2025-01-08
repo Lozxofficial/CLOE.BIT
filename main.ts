@@ -48,6 +48,7 @@ DigitalPin.P1,
 NeoPixelMode.RGB
 )
 matrix.Brightness(32)
+datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
 for (let index = 0; index < 24; index++) {
     matrix.show()
     matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.White))
@@ -78,7 +79,7 @@ basic.forever(function () {
             `)
     }
     if (page_number == 1) {
-    	
+        basic.showNumber(1)
     }
     if (page_number == 2) {
         basic.showNumber(2)
