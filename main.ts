@@ -35,8 +35,10 @@ input.onButtonPressed(Button.B, function () {
     	
     }
 })
+let LC = 0
 let page_number = 0
 let strip: neopixel.Strip = null
+music.setBuiltInSpeakerEnabled(true)
 let login_complete = 0
 strip = neopixel.create(DigitalPin.P0, 90, NeoPixelMode.RGB)
 strip.showRainbow(1, 360)
@@ -52,36 +54,75 @@ matrix.Brightness(32)
 datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
 for (let index = 0; index < 24; index++) {
     matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
     matrix.show()
     basic.pause(100)
     matrix.clear()
     matrix.show()
     matrix.setPixel(9, 8, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
+    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.Yellow))
     matrix.show()
     basic.pause(100)
     matrix.clear()
     matrix.setPixel(8, 9, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(2, 0, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
+    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.Yellow))
+    matrix.setPixel(2, 0, neopixel.colors(NeoPixelColors.Orange))
     matrix.show()
     basic.pause(100)
     matrix.clear()
     matrix.setPixel(7, 8, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(2, 0, neopixel.colors(NeoPixelColors.White))
-    matrix.setPixel(3, 0, neopixel.colors(NeoPixelColors.White))
+    matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
+    matrix.setPixel(1, 0, neopixel.colors(NeoPixelColors.Yellow))
+    matrix.setPixel(2, 0, neopixel.colors(NeoPixelColors.Orange))
+    matrix.setPixel(3, 0, neopixel.colors(NeoPixelColors.Green))
+    matrix.setPixel(15, 15, neopixel.colors(NeoPixelColors.Green))
     matrix.show()
-    basic.pause(100)
+    music.play(music.tonePlayable(988, music.beat(BeatFraction.Half)), music.PlaybackMode.InBackground)
+    basic.pause(150)
     matrix.clear()
     login_complete += 1
 }
 basic.forever(function () {
-	
+    if (login_complete == 4) {
+        if (LC == 0) {
+            matrix.clear()
+            matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.Red))
+            matrix.setPixel(9, 8, neopixel.colors(NeoPixelColors.Green))
+            matrix.setPixel(8, 9, neopixel.colors(NeoPixelColors.Blue))
+            matrix.setPixel(7, 8, neopixel.colors(NeoPixelColors.Indigo))
+            matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
+            matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Black))
+            matrix.show()
+            music.play(music.stringPlayable("B G F B G A C5 F ", 323), music.PlaybackMode.UntilDone)
+            music.play(music.stringPlayable("B G F B G A C5 F ", 323), music.PlaybackMode.UntilDone)
+            music.play(music.stringPlayable("B C5 B C5 B - - - ", 323), music.PlaybackMode.UntilDone)
+            matrix.setPixel(8, 8, neopixel.colors(NeoPixelColors.Indigo))
+            matrix.show()
+            music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
+            basic.pause(500)
+            matrix.setPixel(8, 8, neopixel.colors(NeoPixelColors.Black))
+            matrix.show()
+            matrix.setPixel(8, 8, neopixel.colors(NeoPixelColors.Orange))
+            matrix.show()
+            music.play(music.tonePlayable(262, music.beat(BeatFraction.Whole)), music.PlaybackMode.UntilDone)
+            basic.pause(500)
+            basic.pause(0)
+            matrix.setPixel(8, 8, neopixel.colors(NeoPixelColors.Black))
+            matrix.show()
+            matrix.setPixel(8, 8, neopixel.colors(NeoPixelColors.White))
+            matrix.show()
+            music.play(music.tonePlayable(262, music.beat(BeatFraction.Breve)), music.PlaybackMode.UntilDone)
+            basic.pause(1000)
+            matrix.clear()
+            matrix.show()
+            matrix.setPixel(0, 15, neopixel.colors(NeoPixelColors.Indigo))
+            matrix.setPixel(1, 15, neopixel.colors(NeoPixelColors.Blue))
+            matrix.show()
+            LC = 1
+        }
+    }
 })
 basic.forever(function () {
     if (page_number == 6) {
