@@ -35,6 +35,7 @@ input.onButtonPressed(Button.B, function () {
     	
     }
 })
+let LC = 0
 let page_number = 0
 let strip: neopixel.Strip = null
 let login_complete = 0
@@ -81,7 +82,18 @@ for (let index = 0; index < 24; index++) {
     login_complete += 1
 }
 basic.forever(function () {
-	
+    if (login_complete == 24) {
+        if (LC == 0) {
+            matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.Red))
+            matrix.setPixel(9, 8, neopixel.colors(NeoPixelColors.Green))
+            matrix.setPixel(8, 9, neopixel.colors(NeoPixelColors.Blue))
+            matrix.setPixel(7, 8, neopixel.colors(NeoPixelColors.Indigo))
+            matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
+            basic.pause(5000)
+            matrix.clear()
+            LC = 1
+        }
+    }
 })
 basic.forever(function () {
     if (page_number == 6) {
