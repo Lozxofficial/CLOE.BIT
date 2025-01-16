@@ -52,7 +52,7 @@ NeoPixelMode.RGB
 )
 matrix.Brightness(32)
 datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
-for (let index = 0; index < 4; index++) {
+for (let index = 0; index < 24; index++) {
     matrix.setPixel(8, 7, neopixel.colors(NeoPixelColors.White))
     matrix.setPixel(0, 0, neopixel.colors(NeoPixelColors.Red))
     matrix.show()
